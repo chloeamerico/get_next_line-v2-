@@ -6,7 +6,7 @@
 /*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:52:18 by camerico          #+#    #+#             */
-/*   Updated: 2024/12/18 17:08:13 by camerico         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:53:24 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,27 @@
 #include <stdlib.h>
 #include <string.h>
 
-char	*fill_stash_and_line(char *buffer, char *line)
+char	*fill_stash(char *buffer, char *stash)
 {
 	int	i;
-	// int j;
-	int k;
+	int j;
 
 	i = 0;
-	// j = 0;
-	k = strlen(line);
+	j = 0;
 	while(buffer[i] != '\n' && buffer[i])
 	{
 		line[k] = buffer[i];
 		k++;
 		i++;
 	}
-	// if (buffer[i] == '\n')
-	// 	line[k++] = buffer[i++];
-	// while(buffer[i])
-	// {
-	// 	stash[j++] = buffer[i++];
-	// }
-	// buffer = 0;
-	// stash[j] = '\0';
+	if (buffer[i] == '\n')
+		line[k++] = buffer[i++];
+	while(buffer[i])
+	{
+		stash[j++] = buffer[i++];
+	}
+	buffer = 0;
+	stash[j] = '\0';
 	return (stash);
 }
 

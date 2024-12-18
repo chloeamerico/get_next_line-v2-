@@ -6,7 +6,7 @@
 /*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:25:50 by camerico          #+#    #+#             */
-/*   Updated: 2024/12/18 15:51:53 by camerico         ###   ########.fr       */
+/*   Updated: 2024/12/18 20:05:49 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,18 @@ char *get_next_line(int fd)
 {
 	char	*line;
 	static char	*stash;
-	char	*buffer;
+	char	buffer[BUFFER_SIZE + 1];
 	
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
 	line = NULL;
 	line = ft_strjoin_free(stash, line);
-	buffer = read_to_buffer(fd, line, buffer, stash);
-	line = fill_line();
-	
+	read_to_buffer(buffer, fd, line, stash);
+	read_to_buffer(buffer, fd, line, stash);
+	return (line);
 }
 
-char	*read_to_buffer(int *fd, char *line, char *buffer, char *stash)
+void	read_to_buffer(char *buffer, int fd, char *line, char *stash)
 {
 	int	b_read;
 
@@ -39,41 +36,54 @@ char	*read_to_buffer(int *fd, char *line, char *buffer, char *stash)
 	{
 		b_read = read(fd, buffer, BUFFER_SIZE);
 		if (b_read < 0)
-			return (free(buffer), NULL);
+		{
+			free(line);
+			return;
+		}
 		buffer[b_read] = '\0';
-		fill_stash_and_line(buffer, stash, line);
+		line = ft_strjoin_free(line, buffer);
 	}
-	return (buffer);
+	fill_stash(line, stash);
 }
 
-void	fill_stash_and_line(char *buffer, char *stash, char *line)
+void	fill_stash(char *line, char *stash)
 {
 	int	i;
 	int j;
-	int k;
 
-	while(buffer[i] != '\n' && buffer[i])
+	i = 0;
+	j = 0;
+	while(line[i] != '\n' && line[i])
+		i++;
+	if (line[i] == '\n')
+		i++;
+	while(line[i])
 	{
-		line[k++] = buffer[i++];
+		stash[j] = line[i];
+		line[i]= '\0';
+		i++;
+		j++;
 	}
-	if (buffer[i] == '\n')
-		line[k++] = buffer[i++];
-	while(buffer[i])
-	{
-		stash[j++] = buffer[i++];
-	}
-	buffer = 0;
 	stash[j] = '\0';
 }
 
-
-char	fill_line(char *line, char *buffer)
+int	main(void)
 {
-	if (buffer[b_read] != '\n')
-		ft_strjoin_free(line, buffer);
-	else
+	int fd;
+	char *str;
+
+	fd = open("test3.txt", O_RDONLY);
+	if (fd < 0)
 	{
-		ft
+		printf("%s", "une erreur s'est produite dans l'ouverture du fichier");
+		return (1);
 	}
-	
+	str = get_next_line(fd);
+	printf("%s", str);
+	free(str);
+	str = get_next_line(fd);
+	printf("%s", str);
+	free(str);
+	close(fd);
+	return (0);
 }
