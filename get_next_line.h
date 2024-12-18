@@ -6,7 +6,7 @@
 /*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:19:26 by camerico          #+#    #+#             */
-/*   Updated: 2024/12/17 16:19:50 by camerico         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:16:18 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@
 /* ************************************************************************** */
 
 char	*get_next_line(int fd);
+char	*ft_strchr(const char *s, int c);
+int	ft_strlen(char *s);
+char	*ft_strjoin_free(char const *s1, char const *s2);
+void	fill_stash(char *buffer, char *stash);
+
 
 /* ************************************************************************** */
 /* STRUCTURES                                                                 */
