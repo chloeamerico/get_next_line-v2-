@@ -6,7 +6,7 @@
 /*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:25:50 by camerico          #+#    #+#             */
-/*   Updated: 2024/12/19 18:09:12 by camerico         ###   ########.fr       */
+/*   Updated: 2024/12/19 18:51:00 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ char	*read_to_buffer(char *buffer, int fd, char *line)
 	{
 		b_read = read(fd, buffer, BUFFER_SIZE);
 		if (b_read < 0)
+		{
+			buffer[0] = '\0';
 			return (free(line), NULL);
+		}
 		buffer[b_read] = '\0';
 		line = ft_strjoin_free(line, buffer);
 		if (!line[0])
