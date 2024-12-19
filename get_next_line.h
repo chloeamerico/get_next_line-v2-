@@ -6,7 +6,7 @@
 /*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:19:26 by camerico          #+#    #+#             */
-/*   Updated: 2024/12/18 20:04:23 by camerico         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:06:15 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@
 /* ************************************************************************** */
 
 char	*get_next_line(int fd);
-void	read_to_buffer(char *buffer, int fd, char *line, char *stash);
-void	fill_stash(char *line, char *stash);
-int	ft_strlen(char *s);
+char	*read_to_buffer(char *buffer, int fd, char *line);
+void	fill_stash(char *line, char *buffer);
+int		ft_strlen(char *s);
 char	*ft_strjoin_free(char *s1, char *s2);
-int	ft_strchr(const char *s, int c);
-
+int		ft_strchr(const char *s, char c);
+char	*ft_strdup_free(char *s);
 
 /* ************************************************************************** */
 /* STRUCTURES                                                                 */
